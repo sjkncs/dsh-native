@@ -1,6 +1,6 @@
 # 依赖与构建产物
 node_modules/
-lib/
+# 注意：lib/ 是随库分发的构建产物，本发行仓库要求入库（仓库测试强制），勿重新忽略
 lib-testing/
 dist/
 *.tsbuildinfo

@@ -1,0 +1,13 @@
+/**
+ * The dsh-reminder stylesheet: only the settings-section rows (the popup is
+ * a native desktop notification now — no in-page cards). Injected once by
+ * the plugin body; class names carry the dsh_reminder prefix.
+ */
+/** Stable <style> element id (idempotent injection across HMR re-runs). */
+export declare const STYLE_ID = "dsh-reminder-style";
+/** The settings panel's injected stylesheet text. */
+export declare const cssText = "\n/* \u8BBE\u7F6E\u9762\u677F\uFF08\u6302\u5728 settings.section \u69FD\u4F4D\uFF0C\u6CBF\u7528 DSH \u6697\u8272\u4E3B\u9898\uFF09 */\n.dsh_reminder_section {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n  min-width: 0;\n}\n.dsh_reminder_sectionTitle {\n  margin: 0;\n  color: var(--dsw-alias-label-primary);\n  font-size: 18px;\n  line-height: 26px;\n  font-weight: 600;\n}\n.dsh_reminder_sectionSubtitle {\n  margin: 0;\n  color: var(--dsw-alias-label-tertiary);\n  font-size: 13px;\n  line-height: 20px;\n}\n.dsh_reminder_row {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 8px 12px;\n  min-width: 0;\n  padding: 14px 16px;\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 12px;\n  background: var(--dsw-alias-bg-layer-1);\n}\n.dsh_reminder_row_disabled {\n  opacity: 0.6;\n}\n.dsh_reminder_checkbox {\n  flex: none;\n  width: 18px;\n  height: 18px;\n  margin: 0;\n  accent-color: var(--dsw-alias-brand-primary);\n  cursor: pointer;\n}\n.dsh_reminder_rowText {\n  display: flex;\n  flex: 1 1 220px;\n  flex-direction: column;\n  gap: 2px;\n  min-width: 0;\n}\n.dsh_reminder_rowTitle {\n  color: var(--dsw-alias-label-primary);\n  font-size: 14px;\n  line-height: 22px;\n}\n.dsh_reminder_rowDesc {\n  color: var(--dsw-alias-label-tertiary);\n  font-size: 13px;\n  line-height: 20px;\n}\n.dsh_reminder_rangeValue {\n  flex: none;\n  min-width: 44px;\n  text-align: right;\n  color: var(--dsw-alias-label-primary);\n  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;\n  font-size: 13px;\n  line-height: 20px;\n}\n.dsh_reminder_range {\n  flex: 1 1 100%;\n  width: 100%;\n  min-width: 0;\n  height: 20px;\n  margin: 2px 0 0;\n  accent-color: var(--dsw-alias-brand-primary);\n  cursor: pointer;\n}\n.dsh_reminder_permissionButton {\n  flex: none;\n  height: 30px;\n  padding: 0 14px;\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 15px;\n  background: var(--dsw-alias-bg-layer-1);\n  color: var(--dsw-alias-label-primary);\n  font: inherit;\n  font-size: 13px;\n  line-height: 20px;\n  cursor: pointer;\n}\n.dsh_reminder_permissionButton:hover {\n  background: var(--dsw-alias-interactive-bg-hover);\n}\n";
+/**
+ * Inject the stylesheet once (stable id; HMR-safe).
+ */
+export declare function adoptStyles(): void;
