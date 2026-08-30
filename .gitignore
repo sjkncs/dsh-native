@@ -1,0 +1,17 @@
+# 依赖与构建工件（注意：packages/*/dist 与 */lib 是随库分发的构建产物，必须入库）
+node_modules/
+/dist/
+*.tsbuildinfo
+
+# 桌面包装器运行时产物
+desktop/*.lnk
+
+# 本地数据与日志（绝不入库；仅限根目录，不误伤 site/data）
+*.log
+.env
+.env.*
+/data/
+
+# 操作系统
+.DS_Store
+Thumbs.db

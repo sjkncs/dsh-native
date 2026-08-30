@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="360" viewBox="0 0 880 360">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101216"/><stop offset="1" stop-color="#1a1e26"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="360" rx="16" fill="url(#bg)"/>
+  <!-- 完成通知 -->
+  <g transform="translate(60, 50)">
+    <rect width="360" height="120" rx="10" fill="#16181f" stroke="#34c77b" stroke-opacity="0.55" stroke-width="1.5"/>
+    <circle cx="36" cy="34" r="17" fill="none" stroke="#34c77b" stroke-width="3"/>
+    <path d="M28 35l6 6 10-12" fill="none" stroke="#34c77b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="66" y="34" fill="#f0f2f5" font-size="15" font-weight="600" font-family="Segoe UI, sans-serif">任务完成</text>
+    <text x="66" y="53" fill="#9aa3b0" font-size="12" font-family="Segoe UI, sans-serif">Task completed</text>
+    <text x="18" y="82" fill="#d0d5dd" font-size="13" font-family="Segoe UI, sans-serif">dsh-reminder · 耗时 1m 24s</text>
+    <text x="18" y="101" fill="#6b7480" font-size="11" font-family="Consolas, monospace">Took 1m 24s · 3-5s auto-dismiss</text>
+  </g>
+  <!-- 审批通知 -->
+  <g transform="translate(460, 50)">
+    <rect width="360" height="120" rx="10" fill="#16181f" stroke="#ffbf00" stroke-opacity="0.55" stroke-width="1.5"/>
+    <circle cx="36" cy="34" r="17" fill="none" stroke="#ffbf00" stroke-width="3"/>
+    <path d="M36 24v12" stroke="#ffbf00" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="36" cy="44" r="2.4" fill="#ffbf00"/>
+    <text x="66" y="34" fill="#f0f2f5" font-size="15" font-weight="600" font-family="Segoe UI, sans-serif">等待你的许可</text>
+    <text x="66" y="53" fill="#9aa3b0" font-size="12" font-family="Segoe UI, sans-serif">Approval needed</text>
+    <text x="18" y="82" fill="#d0d5dd" font-size="13" font-family="Segoe UI, sans-serif">bash · write file outside workspace</text>
+    <text x="18" y="101" fill="#6b7480" font-size="11" font-family="Consolas, monospace">click to jump back to DSH</text>
+  </g>
+  <!-- 底部特性条 -->
+  <g transform="translate(60, 220)">
+    <text x="0" y="20" fill="#f0f2f5" font-size="14" font-weight="600" font-family="Segoe UI, sans-serif">Pops in any window · 点击回 DSH · click to return</text>
+    <text x="0" y="46" fill="#9aa3b0" font-size="13" font-family="Segoe UI, sans-serif">3-5 秒自动消失 · auto-dismiss · 同一任务不重复 · deduped · 轻柔双音 · soft chime</text>
+    <text x="0" y="72" fill="#6b7480" font-size="12" font-family="Segoe UI, sans-serif">DeepSeek Harness plugin · Codex / WorkBuddy style cross-window reminders</text>
+  </g>
+</svg>

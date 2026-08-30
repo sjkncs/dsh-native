@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dsh-native · DeepSeek Harness 正式版（全栈）</title>
+  <meta name="description" content="dsh-native：DeepSeek Harness 正式版全栈发行。官方宿主版本锁定，四个内置插件随库分发，三个社区插件按上游引用，科研版内置开箱即用，一条命令复现整条栈。" />
+  <link rel="stylesheet" href="assets/css/app.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2318b26b'/%3E%3Cpath d='M7 4h10l3 5-8 11L4 9l3-5z' stroke='%23fff' stroke-width='1.6' fill='none' stroke-linejoin='round'/%3E%3Cpath d='M4 9h16M12 20l-3.2-11M12 20l3.2-11' stroke='%23fff' stroke-width='1.1' fill='none'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- 导航 -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="./">
+        <span class="mark mark-ok" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+            <path d="M7 4h10l3 5-8 11L4 9l3-5z" />
+            <path d="M4 9h16M12 20l-3.2-11M12 20l3.2-11" stroke-width="1.1" />
+          </svg>
+        </span>
+        dsh-native
+      </a>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="#stack" data-i18n="nav_stack">插件栈</a>
+        <a href="#presets" data-i18n="nav_presets">预设</a>
+        <a href="#research" data-i18n="nav_research">科研版</a>
+        <a href="#compliance" data-i18n="nav_compliance">合规</a>
+        <a href="#quickstart" data-i18n="nav_quickstart">快速开始</a>
+        <a href="#roadmap" data-i18n="nav_roadmap">路线图</a>
+        <a class="btn btn-ghost" href="https://github.com/sjkncs/dsh-native" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+        <button class="icon-btn" id="lang-toggle" type="button" aria-label="切换到英文">EN</button>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="切换深浅主题">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero：场景图 + 渐变遮罩 + 视差 -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="badges reveal">
+        <span class="badge badge-ga" id="badge-stage">正式版</span>
+        <span class="badge badge-accent">dsh 0.1.1-rc.2</span>
+        <span class="badge badge-ok">MIT</span>
+        <span class="badge">Node.js 18+</span>
+      </div>
+      <h1 class="reveal">
+        <span data-i18n="hero_t1">DeepSeek Harness</span><br />
+        <span class="grad grad-text" data-i18n="hero_t2">正式版 · 全栈</span>
+      </h1>
+      <p class="lead reveal" data-i18n="hero_lead">
+        dsh-native 把一台提升过的 DeepSeek Harness 完整打包：官方宿主版本锁定，四个内置插件随库分发，
+        三个社区插件按上游引用，科研版作为内置预设开箱即用。一条命令，复现整条栈。
+      </p>
+      <div class="cta reveal">
+        <a class="btn btn-primary" href="#quickstart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 3l14 9-14 9V3z"/></svg>
+          <span data-i18n="cta_start">快速开始</span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/sjkncs/dsh-native" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+          <span data-i18n="cta_repo">查看仓库</span>
+        </a>
+      </div>
+      <div class="scroll-hint reveal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI -->
+  <section>
+    <div class="container reveal">
+      <div class="kpi-grid" id="kpi-grid"></div>
+      <p class="small muted" id="data-note"></p>
+    </div>
+  </section>
+
+  <!-- 架构 -->
+  <section id="architecture">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="arch_title">五层装配架构</h2>
+        <p class="lead" data-i18n="arch_lead">
+          不改动官方内核：dsh CLI 提供宿主运行时，profile 组合 bundle，插件以 cordis patch 注入界面，
+          preset 以声明式 YAML 组装 agent，技能目录即插即用。每层可独立升级与替换。
+        </p>
+      </div>
+      <div class="pipeline reveal">
+        <div class="layer">
+          <div class="tag">L1 · Host</div>
+          <h3 data-i18n="arch_l1_t">dsh CLI</h3>
+          <p data-i18n="arch_l1">官方 Harness 运行时，版本锁定 0.1.1-rc.2，保证复现一致。</p>
+        </div>
+        <div class="layer">
+          <div class="tag">L2 · Profile</div>
+          <h3 data-i18n="arch_l2_t">web profile</h3>
+          <p data-i18n="arch_l2">profile/package.json 声明全部依赖与 bundle 组合，安装脚本合并写入本机。</p>
+        </div>
+        <div class="layer">
+          <div class="tag">L3 · Plugins</div>
+          <h3 data-i18n="arch_l3_t">七个插件</h3>
+          <p data-i18n="arch_l3">四个随库分发（源码 + 构建产物可审计），三个按上游来源引用。</p>
+        </div>
+        <div class="layer">
+          <div class="tag">L4 · Presets</div>
+          <h3 data-i18n="arch_l4_t">三个预设</h3>
+          <p data-i18n="arch_l4">科研 / 建模编程 / 论文：persona、工具面、技能全部声明式，随库可审。</p>
+        </div>
+        <div class="layer">
+          <div class="tag">L5 · Skills</div>
+          <h3 data-i18n="arch_l5_t">技能插槽</h3>
+          <p data-i18n="arch_l5">skills/ 目录即插即用，随 preset 携带，不改配置即生效。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 插件栈 -->
+  <section id="stack">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="stack_title">插件栈：七件套一览</h2>
+        <p class="lead" data-i18n="stack_lead">
+          内置插件随库分发（源码与构建产物都在仓库里，可审计、可重建）；
+          社区插件按上游来源引用，装哪一版由清单决定。
+        </p>
+      </div>
+      <div class="table-wrap reveal" style="margin-top:22px">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="stack_name">名称</th>
+              <th data-i18n="stack_version">版本</th>
+              <th data-i18n="stack_origin">来源</th>
+              <th data-i18n="stack_role">职责</th>
+            </tr>
+          </thead>
+          <tbody id="stack-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 预设 -->
+  <section id="presets">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="presets_title">三个内置预设</h2>
+        <p class="lead" data-i18n="presets_lead">
+          显示名统一英文（宿主不翻译用户预设名），描述与技能包随库分发；科研预设为默认预设。
+        </p>
+      </div>
+      <div class="grid-3 reveal" id="presets-grid" style="margin-top:26px"></div>
+    </div>
+  </section>
+
+  <!-- 内置科研版 -->
+  <section id="research">
+    <div class="container">
+      <div class="visual-row reveal">
+        <div>
+          <h2 data-i18n="research_title">内置科研版</h2>
+          <p class="lead" data-i18n="research_lead">
+            科研版整建制内置：科研模式预设 + dsh-research-agent 插件 + 学术检索插件。
+            设置面板一枚「科研 · agent 模式」开关接管默认预设与工作台；细节见科研版专站。
+          </p>
+          <p style="margin-top:18px">
+            <a class="btn btn-ghost" href="https://sjkncs.github.io/dsh-research/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              <span data-i18n="research_more">科研版详情</span>
+            </a>
+          </p>
+        </div>
+        <div>
+          <div class="card">
+            <h3 data-i18n="research_modules">工作台五模块</h3>
+            <div class="chip-row" id="research-modules" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+          </div>
+          <div class="card" style="margin-top:14px">
+            <h3 data-i18n="research_cards">情境入口六卡</h3>
+            <div class="chip-row" id="research-cards" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合规 -->
+  <section id="compliance">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="cmp_title">合规：红线高于一切流程</h2>
+        <p class="lead" data-i18n="cmp_lead">
+          发行级红线由仓库测试强制：措辞、图标、密钥卫生全仓扫描；
+          科研预设在运行时再叠加学术诚信约束与最小工具面。
+        </p>
+      </div>
+      <div class="grid-2 reveal" style="margin-top:26px">
+        <div class="card">
+          <h3 data-i18n="cmp_redlines">发行红线</h3>
+          <ul class="roadmap" id="redlines" style="margin-top:14px"></ul>
+        </div>
+        <div class="card">
+          <h3>CI</h3>
+          <p class="small" style="margin-top:14px">ubuntu-latest · windows-latest · macos-latest</p>
+          <div class="chip-row" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+            <span class="badge badge-ok">node --test</span>
+            <span class="badge badge-ok">policy scan</span>
+            <span class="badge badge-ok">preset invariants</span>
+            <span class="badge badge-ok">plugin manifests</span>
+            <span class="badge badge-ok">Pages deploy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 快速开始 -->
+  <section id="quickstart">
+    <div class="container">
+      <div class="reveal">
+        <h2 data-i18n="qs_title">快速开始</h2>
+        <p class="lead" data-i18n="qs_lead">一条命令复现完整的全栈环境：CLI、七个插件、三个预设全部就位。</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="n">1</div>
+          <div>
+            <h3 data-i18n="qs_1_t">克隆仓库</h3>
+            <p data-i18n="qs_1_d">前置条件：Node.js 18+ 与 npm。</p>
+            <pre>git clone https://github.com/sjkncs/dsh-native.git
+cd dsh-native</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <div>
+            <h3 data-i18n="qs_2_t">一键安装</h3>
+            <p data-i18n="qs_2_d">安装锁版本的 dsh CLI，把四个内置与三个社区插件写入 web profile 并注册 bundle，拷贝三个预设；设置文件缺失时写入模板。已装过 dsh 可加 <code>--skip-dsh</code>。</p>
+            <pre>node scripts/setup.mjs</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <div>
+            <h3 data-i18n="qs_3_t">启动</h3>
+            <p data-i18n="qs_3_d">浏览器访问本地服务；默认预设已是科研模式，也可在预设下拉里切换。</p>
+            <pre>dsh web   # http://127.0.0.1:3080</pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <div>
+            <h3 data-i18n="qs_4_t">可选：桌面包装器</h3>
+            <p data-i18n="qs_4_d">Electron 窗口自启动 dsh web，关窗即清理整棵进程树，无孤儿进程。</p>
+            <pre>cd desktop &amp;&amp; npm install &amp;&amp; npm start</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 仓库结构 -->
+  <section>
+    <div class="container">
+      <h2 class="reveal" data-i18n="tree_title">仓库结构</h2>
+      <div class="table-wrap reveal" style="margin-top:22px">
+        <table>
+          <thead>
+            <tr><th data-i18n="tree_path">路径</th><th data-i18n="tree_desc">说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>packages/</code></td><td data-i18n="tree_1">四个内置插件 + 共享核心库：源码 + 构建产物 + cordis patch</td></tr>
+            <tr><td><code>presets/</code></td><td data-i18n="tree_2">三个预设：科研（默认）/ 建模编程 / 论文，随带技能目录</td></tr>
+            <tr><td><code>profile/package.json</code></td><td data-i18n="tree_3">web profile 清单模板：依赖与 bundle 组合</td></tr>
+            <tr><td><code>settings/settings.template.yaml</code></td><td data-i18n="tree_4">设置模板（已脱敏，不含任何密钥）</td></tr>
+            <tr><td><code>desktop/</code></td><td data-i18n="tree_5">Electron 桌面包装器：自启动、就绪轮询、进程树清理</td></tr>
+            <tr><td><code>scripts/setup.mjs</code></td><td data-i18n="tree_6">跨平台一键安装脚本（Windows / macOS / Linux）</td></tr>
+            <tr><td><code>site/</code></td><td data-i18n="tree_7">本静态展示站，由 GitHub Pages 托管</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 路线图 -->
+  <section id="roadmap">
+    <div class="container reveal">
+      <h2 data-i18n="rd_title">路线图</h2>
+      <ul class="roadmap" id="roadmap-list" style="margin-top:22px"></ul>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <strong>dsh-native</strong> · <span id="footer-tagline">DeepSeek Harness 正式版 · 全栈发行</span>
+        <div class="small muted" data-i18n="footer_note">MIT 许可 · 非 DeepSeek 官方产品；DeepSeek Harness 为深度求索官方开源项目</div>
+      </div>
+      <div style="display:flex;gap:16px">
+        <a href="https://github.com/sjkncs/dsh-native" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://sjkncs.github.io/dsh-native/" target="_blank" rel="noopener">Pages</a>
+        <a href="https://sjkncs.github.io/dsh-research/" target="_blank" rel="noopener">dsh-research</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "dsh-native",
+  "private": true,
+  "type": "module",
+  "description": "DeepSeek Harness 正式版（GA）全栈发行仓库：宿主 + 内置科研版 + 工作台/提醒/检索插件 + 三预设，仓库级测试入口",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  },
+  "devDependencies": {
+    "yaml": "^2.6.0"
+  }
+}

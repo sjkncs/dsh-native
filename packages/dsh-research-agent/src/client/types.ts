@@ -1,0 +1,105 @@
+/**
+ * 与部署端 .d.ts 核对过的最小结构类型（0.1.1-rc.2：settings.general.item /
+ * shell.overlay / conversation.input.dock / sidebar.footer.action 槽，
+ * workspaces.create/connectWorkspace/startSession，createSnapshotStore）。
+ * 树外包不安装 @deepseek-ai 类型依赖，构建走 transpile-only，
+ * 这里只声明本插件真正触碰的成员。
+ */
+
+/** dsh-client-runtime/client createSnapshotStore 的返回面。 */
+export interface SnapshotStore<T> {
+  getSnapshot(): T
+  subscribe(fn: () => void): () => void
+  update(mutator: (draft: T) => void): void
+  set(next: T): void
+}
+
+/** SessionSummary 中本插件读取的字段。 */
+export interface SessionRow {
+  id: string
+  blank: boolean
+  agentPreset?: string
+}
+
+/** ctx.sessions.list 快照中本插件读取的字段。 */
+export interface SessionListState {
+  byId: Record<string, SessionRow>
+  current: string | undefined
+}
+
+/** IApiClient 一元响应（payload-direct 视图）。 */
+export type RpcResponseLike<T> =
+  | { result: { ok: true; value: T } }
+  | { result: { ok: false; error: { code?: string } } }
+
+/** agentPreset.list 的行。 */
+export interface PresetEntry {
+  id: string
+  name?: string
+  broken?: string
+  isDefault?: boolean
+}
+
+/** ConnectionHandle.api 中本插件使用的域。 */
+export interface AgentPresetsApi {
+  list(payload: Record<string, never>): Promise<RpcResponseLike<{ presets: readonly PresetEntry[] }>>
+  select(payload: { sessionId: string; agentPreset: string }): Promise<RpcResponseLike<{ agentPreset: string }>>
+}
+
+/** 设置域：默认预设写在 agent-presets 命名空间的 default 字段。 */
+export interface SettingsApi {
+  update(payload: { ns: string; patch: Record<string, unknown> }): Promise<RpcResponseLike<unknown>>
+}
+
+/** 会话作用域 slot 标准 props 中的输入动作面。 */
+export interface InputActionsLike {
+  setDraft(text: string): void
+  submit(): void
+}
+
+/** 会话作用域上下文（sessions.scope 返回）中本插件触碰的成员。 */
+export interface AgentScopeLike {
+  get(name: 'conversation'): {
+    input: { for(actx: AgentScopeLike): { setDraft(text: string): void } }
+  } | undefined
+}
+
+/** WorkspaceView 中本插件读取的字段（wire 投影用 workspaceId，不是 id）。 */
+export interface WorkspaceViewLike {
+  workspaceId: string
+  path?: string
+}
+
+/** 本插件注入的 cordis 服务面（结构子集）。 */
+export interface ResearchCtx {
+  effect(callback: () => () => void, label?: string): void
+  get(name: 'connection'): { api: { agentPresets: AgentPresetsApi; settings: SettingsApi } } | undefined
+  get(name: 'locale'): {
+    register(ns: string, locale: string, dict: Record<string, string>): () => void
+    bind(ns: string): (key: string) => string
+    subscribe(fn: () => void): () => void
+    getSnapshot(): { active: string; revision: number }
+  } | undefined
+  slots: {
+    register(options: object, component: unknown): () => void
+    inject(key: string, callback: () => () => void): () => void
+  }
+  theme: {
+    overrideTokens(source: string, tokens: Record<string, { light: string; dark: string }>): () => void
+  }
+  sessions: {
+    list: { getSnapshot(): SessionListState; subscribe(fn: () => void): () => void }
+    noteAgentPreset(sessionId: string, agentPreset: string): void
+    scope(id: string): AgentScopeLike | undefined
+    /** 打开会话（connectWorkspace 契约：调用方自行导航）。 */
+    open(sessionId: string): void
+  }
+  workspaces: {
+    /** 注册（幂等：已注册的路径直接返回现有工作区）。 */
+    create(input: { path: string }): Promise<WorkspaceViewLike>
+    /** 连接工作区到其可复用/新建的空白会话，返回会话 id（不负责打开）。 */
+    connectWorkspace(workspaceId: string): Promise<string>
+    /** 新会话流程（含 open）。 */
+    startSession(workspaceId?: string): void
+  }
+}

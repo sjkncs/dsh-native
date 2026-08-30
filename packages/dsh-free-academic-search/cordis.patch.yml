@@ -1,0 +1,5 @@
+# dsh-free-academic-search — 免费学术搜索插件（无需 API key、无需积分）。
+# 把 free-academic-search 插件注册进 Cordis 应用。
+- insert:
+    - id: free-academic-search
+      name: dsh-free-academic-search

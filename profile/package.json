@@ -1,0 +1,27 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "@nanmicoder/dsh-agent-teams": "^0.1.14",
+    "@sanqi-normal/dsh-webui-market-plugin": "^0.5.5",
+    "dsh-free-academic-search": "file:PACKAGES/dsh-free-academic-search",
+    "dsh-reminder": "file:PACKAGES/dsh-reminder",
+    "dsh-research-agent": "file:PACKAGES/dsh-research-agent",
+    "dsh-usage": "github:Aisland-SJL/dsh-usage",
+    "dsh-worktable": "file:PACKAGES/dsh-worktable"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app",
+        "dsh-worktable",
+        "@sanqi-normal/dsh-webui-market-plugin",
+        "@nanmicoder/dsh-agent-teams",
+        "dsh-usage",
+        "dsh-reminder",
+        "dsh-research-agent"
+      ]
+    }
+  }
+}

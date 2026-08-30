@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>页面未找到 · dsh-native</title>
+  <link rel="stylesheet" href="/dsh-native/assets/css/app.css" />
+  <meta http-equiv="refresh" content="4;url=/dsh-native/" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/dsh-native/">
+        <span class="mark mark-ok" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+            <path d="M7 4h10l3 5-8 11L4 9l3-5z" />
+            <path d="M4 9h16M12 20l-3.2-11M12 20l3.2-11" stroke-width="1.1" />
+          </svg>
+        </span>
+        dsh-native
+      </a>
+    </div>
+  </header>
+  <main class="notfound">
+    <div>
+      <h1>404</h1>
+      <p>页面不存在，正在带你回到首页……</p>
+      <p><a class="btn btn-primary" href="/dsh-native/">立即返回</a></p>
+    </div>
+  </main>
+  <script>
+    try {
+      if (localStorage.getItem("dsh-native-theme") === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    } catch (e) {}
+    setTimeout(function () { location.replace("/dsh-native/"); }, 3500);
+  </script>
+</body>
+</html>

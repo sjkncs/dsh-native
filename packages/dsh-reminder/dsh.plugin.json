@@ -1,0 +1,12 @@
+{
+  "name": "dsh-reminder",
+  "description": "Approval and completion reminder cards for the DeepSeek Harness web GUI",
+  "version": "0.1.0",
+  "entry": {
+    "name": "dsh-reminder",
+    "inject": []
+  },
+  "client": {
+    "platform": "web"
+  }
+}

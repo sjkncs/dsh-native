@@ -1,0 +1,2 @@
+name: Modeling & Coding Agent
+description: The modeling + programming seat of our math-modeling team. Up to two members may share this preset, each with an independent session workspace, coordinating through three separate folders (member-a / member-b) in the Gitee repo without stepping on each other. Covers problem analysis and modeling, code implementation (Python/MATLAB), results and figure production, reproducibility checklists, and Gitee commit/pull.

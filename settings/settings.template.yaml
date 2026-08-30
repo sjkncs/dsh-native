@@ -1,0 +1,24 @@
+# dsh-native settings template (sanitized).
+# 拷贝到 ~/.dsh/settings.yaml（或由 scripts/setup.mjs 在缺失时写入）。
+# API key 一律不写在这里：官方路由经 ~/.dsh/.credentials.yaml 的 refs 提供（DEEPSEEK_API_KEY）。
+
+ui-theme:
+  preference: light
+
+ui-conversation:
+  busyEnter: steer
+
+# 内置科研版：默认预设切到 research（dsh-research-agent 的「科研 · agent 模式」开关也托管这一项）
+agent-presets:
+  default: research
+
+agent-default-model:
+  provider: deepseek-official
+  model: deepseek-v4-flash-vision-exp
+  reasoningEffort: high
+
+permission:
+  defaultPreset: danger-full-access
+
+locale:
+  preference: en

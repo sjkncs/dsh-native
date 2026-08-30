@@ -1,0 +1,45 @@
+{
+  "name": "dsh-free-academic-search",
+  "version": "0.1.0",
+  "description": "Free academic search & download plugin for DeepSeek Harness (no API key, no credits)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoujialin1997/free-academic-search.git"
+  },
+  "homepage": "https://github.com/zoujialin1997/free-academic-search#readme",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "free-academic-core": "file:../free-academic-core"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1",
+    "@deepseek-ai/dsh-tools": ">=0.1.0-rc.6",
+    "@deepseek-ai/schemastery": ">=3.18.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "@types/node": "^22.20.0",
+    "vitest": "^4.1.8"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
